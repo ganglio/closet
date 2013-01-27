@@ -31,21 +31,20 @@ vows.describe('closet').addBatch({
 			},
 			'then get()': {
 				'if the key exists': function(topic) {
+					topic.set('test_key','test_value');
 					assert.equal(topic.get('test_key'),'test_value');
 				},
 				'if the key does not exist': function(topic) {
 					assert.equal(topic.get('no_key'),undefined);
 				}
 			},
-			'then del()': {
-				'if the key exists': function(topic) {
-					assert.equal(topic.del('test_key'),'test_value');
-					assert.equal(topic.del('test_key'),undefined);
-				},
-				'if the key does not exist': function(topic) {
-					assert.equal(topic.del('no_key'),undefined);
-				}
+			'then del()': function(topic) {
+				topic.del('test_key');
+				assert.equal(topic.get('test_key'),undefined);
 			}
+		},
+		'Chainability': function(topic) {
+			assert.equal(topic.set('test',33).get('test'),33);
 		}
 	},
 	'Testing persist()': {
