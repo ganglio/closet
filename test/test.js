@@ -4,7 +4,7 @@ var vows = require('vows'),
 		fs = require('fs'),
 		closet = require('../lib/closet');
 
-var storage = path.join(__dirname,'tmp','db.json');
+var storage_file = path.join(__dirname,'tmp','db.json');
 
 function clean() {
 	try {
@@ -28,8 +28,36 @@ vows.describe('closet').addBatch({
 				topic.set('test_key','test_value');
 				assert.equal(topic.json.test_key,'test_value');
 			},
-			'then get()': function(topic) {
-				assert.equal(topic.get('test_key'),'test_value');
+			'then get()': {
+				'if the key exists': function(topic) {
+					assert.equal(topic.get('test_key'),'test_value');
+				},
+				'if the key does not exist': function(topic) {
+					assert.equal(topic.get('no_key'),undefined);
+				}
+			},
+			'then del()': {
+				'if the key exists': function(topic) {
+					assert.equal(topic.del('test_key'),'test_value');
+					assert.equal(topic.del('test_key'),undefined);
+				},
+				'if the key does not exist': function(topic) {
+					assert.equal(topic.del('no_key'),undefined);
+				}
+			}
+		},
+		'persist()': {
+			'if the storage is initialised': function(topic) {
+				topic.init(storage_file);
+				topic.set('key','value');
+				topic.persist();
+				var storage = JSON.parse(fs.readFileSync(storage_file));
+				//console.log(storage);
+				assert.equal(storage.key,'value');
+				clean();
+			},
+			'if the storage is not initialised': function(topic) {
+				topic.persist();
 			}
 		}
 	}
