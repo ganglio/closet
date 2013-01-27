@@ -45,11 +45,74 @@ vows.describe('closet').addBatch({
 		},
 		'Chainability': function(topic) {
 			assert.equal(topic.set('test',33).get('test'),33);
+		},
+		'Callbacks': {
+			topic: function() { return closet; },
+			'init()': function(topic) {
+				topic.init(storage_file,function(sf){
+					assert.equal(sf,storage_file);
+				});
+			},
+			'set()': function(topic) {
+				topic.set('the_key','the_value',function(key,value){
+					assert.equal(key,'the_key');
+					assert.equal(value,'the_value');
+				});
+			},
+			'get()': function(topic) {
+				topic
+					.set('the_key','the_value')
+					.get('the_key',function(key,value){
+						assert.equal(key,'the_key');
+						assert.equal(value,'the_value');
+					});
+			},
+			'del()': function(topic) {
+				topic
+					.set('the_key','the_value')
+					.del('the_key',function(key,value){
+						assert.equal(key,'the_key');
+						assert.equal(value,'the_value');
+					});
+			},
+			'load()': {
+				'file exists': function(topic) {
+					topic
+						.init(load_file)
+						.load(function(res){
+							assert.isTrue(res);
+						});
+				},
+				'file does not exist': function(topic) {
+					topic
+						.init('not_there.json')
+						.load(function(res){
+							assert.isFalse(res);
+						});
+				}
+			},
+			'persist()': {
+				'if the storage is initialised': function(topic) {
+					topic
+						.init(storage_file)
+						.persist(function(res){
+							assert.isTrue(res);
+						});
+				},
+				'if the storage is not initialised': function(topic) {
+					topic.storage = null;
+					topic
+						.persist(function(res){
+							assert.isFalse(res);
+						});
+				}
+			}
 		}
 	},
 	'Testing persist()': {
 		topic: function() { return closet; },
 		'if the storage is not initialised': function(topic) {
+			topic.storage = null;
 			assert.equal(topic.persist(),false);
 		},
 		'if the storage is initialised': function(topic) {
@@ -64,6 +127,7 @@ vows.describe('closet').addBatch({
 	'Testing load()': {
 		topic: function() { return closet; },
 		'if the storage is not initialised': function(topic) {
+			topic.storage = null;
 			assert.isFalse(topic.load());
 		},
 		'if the storage is initialised': function(topic) {
