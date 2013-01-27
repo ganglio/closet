@@ -1,6 +1,6 @@
 {
   "name": "closet",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "JSON persistent storage",
   "main": "lib/closet.js",
   "scripts": {

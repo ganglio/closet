@@ -1,2 +1,4 @@
 node_modules
 test/tmp/test_db.json
+npm-debug.log
+
