@@ -19,5 +19,11 @@
     "name":"Roberto Torella",
     "email":"roberto.torella@gmail.com"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "vows": "0.5.x"
+  },
+  "engines": {
+    "node": ">=0.8"
+  }
 }
