@@ -42,7 +42,7 @@ closet
 		if (res.code)
 			console.log("Something happended!",res)
 		else if (res) {
-			console.log("File successfully loaded");
+			console.log("File successfully saved");
 		} else {
 			console.log("Storage not initialized");
 		}
