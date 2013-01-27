@@ -1,3 +1,10 @@
+/*!
+ * closet - JSON persistent storage with methods chainability and callbacks for asynchronous use.
+ * 
+ * Roberto Torella <roberto.torella@gmail.com>
+ * MIT License.
+ */
+
 var vows = require('vows'),
     assert = require('assert'),
     path = require('path'),

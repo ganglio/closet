@@ -1,7 +1,7 @@
 {
   "name": "closet",
   "version": "0.0.6",
-  "description": "JSON persistent storage with command chainability and callbacks for asynchronous use",
+  "description": "JSON persistent storage with methods chainability and callbacks for asynchronous use.",
   "main": "lib/closet.js",
   "scripts": {
     "test": "vows test/*.js --spec --isolate"
