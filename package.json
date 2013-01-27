@@ -1,0 +1,23 @@
+{
+  "name": "closet",
+  "version": "0.0.1",
+  "description": "JSON persistent storage",
+  "main": "lib/closet.js",
+  "scripts": {
+    "test": "vows test/* --spec --isolate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ganglio/closet.git"
+  },
+  "keywords": [
+    "json",
+    "persistent",
+    "storage"
+  ],
+  "author": {
+    "name":"Roberto Torella",
+    "email":"roberto.torella@gmail.com"
+  },
+  "license": "MIT"
+}
