@@ -1,6 +1,6 @@
 {
   "name": "closet",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "JSON persistent storage with methods chainability and callbacks for asynchronous use.",
   "main": "lib/closet.js",
   "scripts": {
