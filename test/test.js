@@ -1,6 +1,6 @@
 /*!
  * closet - JSON persistent storage with methods chainability and callbacks for asynchronous use.
- * 
+ *
  * Roberto Torella <roberto.torella@gmail.com>
  * MIT License.
  */
@@ -23,7 +23,7 @@ function clean() {
 }
 
 vows.describe('closet').addBatch({
-	
+
 	'Testing functionality of ': {
 		topic: function(){ return closet; },
 
@@ -36,14 +36,10 @@ vows.describe('closet').addBatch({
 				topic.set('test_key','test_value');
 				assert.equal(topic.json.test_key,'test_value');
 			},
-			'then get()': {
-				'if the key exists': function(topic) {
-					topic.set('test_key','test_value');
-					assert.equal(topic.get('test_key'),'test_value');
-				},
-				'if the key does not exist': function(topic) {
-					assert.equal(topic.get('no_key'),undefined);
-				}
+			'then get()': function(topic) {
+				topic.set('test_key','test_value');
+				assert.equal(topic.get('test_key'),'test_value');
+				assert.equal(topic.get('no_key'),undefined);
 			},
 			'then del()': function(topic) {
 				topic.del('test_key');
